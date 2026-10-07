@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Luxury & Elite Experience</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#F4E0A5',
+                            DEFAULT: '#D4AF37',
+                            dark: '#AA820A',
+                            accent: '#FFD700',
+                        },
+                        dark: {
+                            base: '#0A0A0A',
+                            card: '#121212',
+                            border: '#2A2A2A',
+                            surface: '#1E1E1E',
+                            hover: '#262626'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px -5px rgba(212, 175, 55, 0.3)',
+                        'gold-lg': '0 10px 30px -5px rgba(212, 175, 55, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF0B9 0%, #D4AF37 50%, #997819 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #E6C667 0%, #D4AF37 50%, #997819 100%);
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+        }
+
+        .backdrop-blur-custom {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Smooth custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2A2A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="bg-dark-base text-gray-100 font-sans antialiased overflow-x-hidden selection:bg-gold selection:text-black">
+
+    <!-- HEADER NAVBAR -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-dark-base/80 backdrop-blur-custom border-b border-dark-border/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center bg-dark-card group-hover:border-gold transition-colors">
+                    <i class="fa-solid fa-car text-gold text-lg group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-xl tracking-wider text-white">TOYOTA</span>
+                    <span class="text-[9px] tracking-[0.3em] font-light text-gold uppercase">Luxury Experience</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#hero" class="text-gray-300 hover:text-gold transition-colors">Inicio</a>
+                <a href="#catalog" class="text-gray-300 hover:text-gold transition-colors">Modelos Elite</a>
+                <a href="#services" class="text-gray-300 hover:text-gold transition-colors">Servicios VIP</a>
+                <a href="#contact" class="text-gray-300 hover:text-gold transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Header Action Button -->
+            <div class="hidden sm:flex items-center gap-4">
+                <button onclick="openTestDriveModal()" class="gold-gradient-bg text-black font-semibold text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:shadow-gold-glow transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                    <i class="fa-regular fa-calendar-check mr-2"></i>Agendar Prueba
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-gold focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-card border-b border-dark-border px-6 py-6 flex-col gap-4">
+            <a href="#hero" class="mobile-nav-link text-gray-300 hover:text-gold py-2 border-b border-dark-border/50">Inicio</a>
+            <a href="#catalog" class="mobile-nav-link text-gray-300 hover:text-gold py-2 border-b border-dark-border/50">Modelos Elite</a>
+            <a href="#services" class="mobile-nav-link text-gray-300 hover:text-gold py-2 border-b border-dark-border/50">Servicios VIP</a>
+            <a href="#contact" class="mobile-nav-link text-gray-300 hover:text-gold py-2">Contacto</a>
+            <button onclick="openTestDriveModal(); toggleMobileMenu();" class="mt-2 w-full gold-gradient-bg text-black font-semibold text-xs uppercase tracking-widest py-3 rounded-full">
+                Agendar Prueba de Manejo
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Hero Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=2000" alt="Toyota Luxury Background" class="w-full h-full object-cover opacity-35 scale-105 animate-pulse-subtle">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/70 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-dark-base/90 via-transparent to-dark-base/90"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center mt-12 sm:mt-0">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dark-card/80 border border-gold/30 backdrop-blur-md mb-6">
+                <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                <span class="text-xs uppercase tracking-widest text-gold font-medium">Concesionario Exclusivo</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                El Arte del Desempeño <br>
+                <span class="gold-gradient-text font-serif italic">y la Sofisticación</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-lg mb-10 font-light leading-relaxed">
+                Descubra la ingeniería japonesa en su máxima expresión. Modelos diseñados para superar expectativas con la potencia, innovación y elegancia de Toyota.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#catalog" class="w-full sm:w-auto px-8 py-4 rounded-full bg-transparent border-2 border-gold text-gold font-semibold text-sm uppercase tracking-wider hover:bg-gold hover:text-black transition-all duration-300 text-center">
+                    Explorar Colección
+                </a>
+                <button onclick="openTestDriveModal()" class="w-full sm:w-auto px-8 py-4 rounded-full gold-gradient-bg text-black font-bold text-sm uppercase tracking-wider hover:shadow-gold-lg transition-all transform hover:-translate-y-1 text-center">
+                    Prueba de Manejo VIP
+                </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-dark-border/60 max-w-4xl mx-auto text-left">
+                <div class="px-4">
+                    <span class="block text-2xl md:text-3xl font-bold text-gold font-serif">100%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Garantía Toyota Elite</span>
+                </div>
+                <div class="px-4">
+                    <span class="block text-2xl md:text-3xl font-bold text-gold font-serif">5★</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Experiencia VIP</span>
+                </div>
+                <div class="px-4">
+                    <span class="block text-2xl md:text-3xl font-bold text-gold font-serif">Hybrid</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Líderes Ecológicos</span>
+                </div>
+                <div class="px-4">
+                    <span class="block text-2xl md:text-3xl font-bold text-gold font-serif">24/7</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Asistencia Concierge</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VEHICLES CATALOG SECTION -->
+    <section id="catalog" class="py-24 bg-dark-base relative">
+        <!-- Decorative Glow -->
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-gold/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold uppercase text-xs font-bold tracking-[0.2em]">Catálogo Exclusivo</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2 mb-4">
+                    Nuestra Colección <span class="gold-gradient-text font-serif">Toyota</span>
+                </h2>
+                <div class="w-24 h-1 gold-gradient-bg mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Seleccione entre nuestros modelos insignia el vehículo que se adapte perfectamente a su estilo de vida.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-12">
+                <button onclick="filterVehicles('all')" class="filter-btn active text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all border border-gold bg-gold text-black font-semibold">
+                    Todos
+                </button>
+                <button onclick="filterVehicles('Deportivo')" class="filter-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all border border-dark-border bg-dark-surface text-gray-300 hover:border-gold/50">
+                    Deportivo
+                </button>
+                <button onclick="filterVehicles('SUV')" class="filter-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all border border-dark-border bg-dark-surface text-gray-300 hover:border-gold/50">
+                    SUV
+                </button>
+                <button onclick="filterVehicles('Híbrido')" class="filter-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all border border-dark-border bg-dark-surface text-gray-300 hover:border-gold/50">
+                    Híbrido
+                </button>
+                <button onclick="filterVehicles('Pickup')" class="filter-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all border border-dark-border bg-dark-surface text-gray-300 hover:border-gold/50">
+                    Pickup
+                </button>
+            </div>
+
+            <!-- Vehicles Grid -->
+            <div id="vehicles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Vehicle Cards will be rendered dynamically via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP SERVICES SECTION -->
+    <section id="services" class="py-20 bg-dark-surface border-y border-dark-border/60 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold uppercase text-xs font-bold tracking-[0.2em]">Atención Preferencial</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Servicios VIP Toyota</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-dark-card p-8 rounded-2xl gold-border-glow group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-2xl mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Financiamiento Elite</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Planes crediticios personalizados con tasas preferenciales y asesoría financiera privada adaptada a sus necesidades.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-dark-card p-8 rounded-2xl gold-border-glow group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-2xl mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Mantenimiento Concierge</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Servicio de recogida y entrega a domicilio para el mantenimiento preventivo y especializado de su vehículo.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-dark-card p-8 rounded-2xl gold-border-glow group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-2xl mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Garantía Extendida Luxury</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Protección total contra imprevistos con cobertura completa en repuestos originales Toyota y asistencia en carretera 24/7.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEST DRIVE MODAL -->
+    <div id="test-drive-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-dark-card border border-gold/30 rounded-2xl w-full max-w-xl p-6 sm:p-8 shadow-2xl relative transform scale-95 transition-all duration-300" id="modal-container">
+            
+            <!-- Close Button -->
+            <button onclick="closeTestDriveModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gold transition-colors p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-6">
+                <span class="text-gold text-xs uppercase font-bold tracking-widest block mb-1">Experiencia Exclusiva</span>
+                <h3 class="text-2xl font-bold text-white">Apartar Prueba de Manejo</h3>
+                <p class="text-gray-400 text-xs mt-1">Sienta la potencia y elegancia Toyota coordinando una cita previa.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="test-drive-form" onsubmit="handleReservation(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Seleccionar Vehículo</label>
+                    <div class="relative">
+                        <select id="modal-car-select" required class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors appearance-none">
+                            <option value="" disabled selected>Elija un modelo...</option>
+                            <option value="Toyota Supra GR">Toyota Supra GR - $58,500</option>
+                            <option value="Toyota Land Cruiser">Toyota Land Cruiser - $86,400</option>
+                            <option value="Toyota RAV4 Hybrid">Toyota RAV4 Hybrid - $32,100</option>
+                            <option value="Toyota Camry TRD">Toyota Camry TRD - $36,800</option>
+                            <option value="Toyota Tacoma TRD Pro">Toyota Tacoma TRD Pro - $49,700</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Fecha Preferida</label>
+                        <input type="date" id="reserve-date" required class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Hora Preferida</label>
+                        <input type="time" id="reserve-time" required class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Nombre Completo</label>
+                    <input type="text" placeholder="Ej: Carlos Mendoza" required class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Teléfono</label>
+                        <input type="tel" placeholder="+58 412 0000000" required class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Correo Electrónico</label>
+                        <input type="email" placeholder="cliente@ejemplo.com" required class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full mt-4 gold-gradient-bg text-black font-bold py-3.5 rounded-xl uppercase tracking-wider text-xs hover:shadow-gold-glow transition-all">
+                    Confirmar Reserva Exclusiva
+                </button>
+            </form>
+
+            <!-- Success Confirmation State -->
+            <div id="reservation-success" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 bg-gold/20 border-2 border-gold rounded-full flex items-center justify-center mx-auto text-gold text-2xl animate-bounce">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white">¡Reserva Solicitada!</h4>
+                <p class="text-gray-300 text-sm max-w-md mx-auto">
+                    Su solicitud para probar el <span id="confirmed-car" class="text-gold font-semibold"></span> ha sido procesada con éxito. Un asesor VIP se pondrá en contacto a la brevedad.
+                </p>
+                <button onclick="closeTestDriveModal()" class="px-6 py-2.5 bg-dark-surface border border-gold/40 text-gold text-xs uppercase font-semibold rounded-full hover:bg-gold hover:text-black transition-colors">
+                    Cerrar Ventana
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK SPEC MODAL -->
+    <div id="spec-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-dark-card border border-gold/30 rounded-2xl w-full max-w-2xl p-6 sm:p-8 shadow-2xl relative transform scale-95 transition-all duration-300" id="spec-modal-container">
+            <button onclick="closeSpecModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gold transition-colors p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div id="spec-modal-content">
+                <!-- Dynamically Filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER SECTION -->
+    <footer id="contact" class="bg-black border-t border-dark-border pt-16 pb-8 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold">
+                            <i class="fa-solid fa-car text-xs"></i>
+                        </div>
+                        <span class="font-bold text-lg text-white">TOYOTA LUXURY</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        El concesionario líder en atención personalizada, venta de modelos de alta gama e innovación automotriz.
+                    </p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-4 border-l-2 border-gold pl-2">Navegación</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#hero" class="hover:text-gold transition-colors">Inicio</a></li>
+                        <li><a href="#catalog" class="hover:text-gold transition-colors">Modelos</a></li>
+                        <li><a href="#services" class="hover:text-gold transition-colors">Servicios VIP</a></li>
+                        <li><a href="javascript:void(0)" onclick="openTestDriveModal()" class="hover:text-gold transition-colors">Prueba de Manejo</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-4 border-l-2 border-gold pl-2">Contacto VIP</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-gold"></i>
+                            <span>Av. Principal de Los Palos Grandes, Caracas</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-gold"></i>
+                            <span>+58 (212) 900-8000</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-gold"></i>
+                            <span>vip@toyotaluxury.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Socials & Hours -->
+                <div>
+                    <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-4 border-l-2 border-gold pl-2">Horario & Redes</h4>
+                    <p class="text-xs mb-4">Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: Previa Cita</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-dark-surface border border-dark-border flex items-center justify-center text-gray-300 hover:border-gold hover:text-gold transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-dark-surface border border-dark-border flex items-center justify-center text-gray-300 hover:border-gold hover:text-gold transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-dark-surface border border-dark-border flex items-center justify-center text-gray-300 hover:border-gold hover:text-gold transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="border-t border-dark-border/40 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>&copy; 2026 Toyota Luxury Experience. Todos los derechos reservados.</p>
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-gray-400">Política de Privacidad</a>
+                    <a href="#" class="hover:text-gray-400">Términos del Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Vehicle Data Array (5 iconic Toyota models)
+        const vehicles = [
+            {
+                id: 1,
+                name: "Toyota Supra GR",
+                category: "Deportivo",
+                price: "$58,500",
+                numericPrice: 58500,
+                image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=800",
+                hp: "382 HP",
+                acceleration: "0-100 km/h: 3.9s",
+                transmission: "Automática 8-Vel / Manual",
+                description: "Puramente deportivo. Diseñado para ofrecer emociones puras al volante con distribución de peso perfecta 50/50."
+            },
+            {
+                id: 2,
+                name: "Toyota Land Cruiser",
+                category: "SUV",
+                price: "$86,400",
+                numericPrice: 86400,
+                image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
+                hp: "326 HP",
+                acceleration: "Torque: 465 lb-pie",
+                transmission: "Tracción 4WD Avanzada",
+                description: "El rey del off-road y el lujo indiscutible. Resistencia legendaria combinada con un diseño interior ultraconfortable."
+            },
+            {
+                id: 3,
+                name: "Toyota RAV4 Hybrid",
+                category: "Híbrido",
+                price: "$32,100",
+                numericPrice: 32100,
+                image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=800",
+                hp: "219 HP",
+                acceleration: "Eficiencia: 40 MPG",
+                transmission: "eCVT Inteligente",
+                description: "Versatilidad y máxima eficiencia ecológica. Una SUV moderna lista para cualquier aventura urbana o viaje largo."
+            },
+            {
+                id: 4,
+                name: "Toyota Camry TRD",
+                category: "Deportivo",
+                price: "$36,800",
+                numericPrice: 36800,
+                image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&q=80&w=800",
+                hp: "301 HP",
+                acceleration: "Motor V6 3.5L",
+                transmission: "Ajuste Deportivo TRD",
+                description: "Elegancia ejecutiva con alma deportiva. Escape doble tuning TRD y suspensión calibrada para la máxima precisión."
+            },
+            {
+                id: 5,
+                name: "Toyota Tacoma TRD Pro",
+                category: "Pickup",
+                price: "$49,700",
+                numericPrice: 49700,
+                image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&q=80&w=800",
+                hp: "326 HP",
+                acceleration: "Suspensión FOX® Q3",
+                transmission: "4x4 Imparable",
+                description: "Construida para dominar cualquier terreno extremo sin sacrificar la tecnología y el confort de primera clase."
+            }
+        ];
+
+        // Render Vehicle Cards
+        function renderVehicles(list) {
+            const grid = document.getElementById('vehicles-grid');
+            grid.innerHTML = '';
+
+            list.forEach(car => {
+                const card = document.createElement('div');
+                card.className = 'bg-dark-card rounded-2xl overflow-hidden gold-border-glow flex flex-col group transition-all duration-300 transform hover:-translate-y-2';
+                
+                card.innerHTML = `
+                    <!-- Image Container -->
+                    <div class="relative overflow-hidden h-56 bg-dark-surface">
+                        <img src="${car.image}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/1e1e1e/D4AF37?text=${encodeURIComponent(car.name)}'">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-black/80 backdrop-blur-md text-gold border border-gold/40 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                                ${car.category}
+                            </span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-80"></div>
+                    </div>
+
+                    <!-- Content Body -->
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors">${car.name}</h3>
+                                <span class="text-lg font-extrabold text-gold font-serif">${car.price}</span>
+                            </div>
+                            <p class="text-gray-400 text-xs line-clamp-2 mb-4 font-light leading-relaxed">
+                                ${car.description}
+                            </p>
+
+                            <!-- Key Specs Badge Grid -->
+                            <div class="grid grid-cols-2 gap-2 mb-6">
+                                <div class="bg-dark-surface border border-dark-border/60 p-2 rounded-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-gauge-high text-gold text-xs"></i>
+                                    <span class="text-[11px] text-gray-300 font-medium">${car.hp}</span>
+                                </div>
+                                <div class="bg-dark-surface border border-dark-border/60 p-2 rounded-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-bolt text-gold text-xs"></i>
+                                    <span class="text-[11px] text-gray-300 font-medium">${car.acceleration}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-dark-border/40">
+                            <button onclick="openSpecModal(${car.id})" class="w-full py-2.5 rounded-xl border border-dark-border text-gray-300 text-xs uppercase font-semibold hover:border-gold/60 hover:text-gold transition-all">
+                                Detalle
+                            </button>
+                            <button onclick="openTestDriveModal('${car.name}')" class="w-full py-2.5 rounded-xl gold-gradient-bg text-black text-xs uppercase font-bold hover:shadow-gold-glow transition-all">
+                                Apartar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Vehicles by Category
+        function filterVehicles(category) {
+            // Update button styles
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-black', 'border-gold', 'font-semibold');
+                btn.classList.add('bg-dark-surface', 'text-gray-300', 'border-dark-border');
+            });
+
+            event.target.classList.remove('bg-dark-surface', 'text-gray-300', 'border-dark-border');
+            event.target.classList.add('bg-gold', 'text-black', 'border-gold', 'font-semibold');
+
+            if (category === 'all') {
+                renderVehicles(vehicles);
+            } else {
+                const filtered = vehicles.filter(car => car.category === category);
+                renderVehicles(filtered);
+            }
+        }
+
+        // Test Drive Modal Handlers
+        function openTestDriveModal(selectedCarName = '') {
+            const modal = document.getElementById('test-drive-modal');
+            const container = document.getElementById('modal-container');
+            const carSelect = document.getElementById('modal-car-select');
+            
+            if (selectedCarName) {
+                carSelect.value = selectedCarName;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('reserve-date').setAttribute('min', today);
+        }
+
+        function closeTestDriveModal() {
+            const modal = document.getElementById('test-drive-modal');
+            const container = document.getElementById('modal-container');
+
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+
+            // Reset Form after closing animation
+            setTimeout(() => {
+                document.getElementById('test-drive-form').classList.remove('hidden');
+                document.getElementById('reservation-success').classList.add('hidden');
+                document.getElementById('test-drive-form').reset();
+            }, 300);
+        }
+
+        // Handle Reservation Submit
+        function handleReservation(event) {
+            event.preventDefault();
+            const carSelected = document.getElementById('modal-car-select').value;
+            
+            document.getElementById('confirmed-car').textContent = carSelected;
+            document.getElementById('test-drive-form').classList.add('hidden');
+            document.getElementById('reservation-success').classList.remove('hidden');
+        }
+
+        // Vehicle Quick Spec Modal
+        function openSpecModal(carId) {
+            const car = vehicles.find(v => v.id === carId);
+            if (!car) return;
+
+            const modal = document.getElementById('spec-modal');
+            const container = document.getElementById('spec-modal-container');
+            const content = document.getElementById('spec-modal-content');
+
+            content.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="rounded-xl overflow-hidden border border-gold/30">
+                        <img src="${car.image}" alt="${car.name}" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/800x500/1e1e1e/D4AF37?text=${encodeURIComponent(car.name)}'">
+                    </div>
+                    <div>
+                        <span class="text-gold text-xs font-bold uppercase tracking-widest">${car.category}</span>
+                        <h3 class="text-2xl font-bold text-white mt-1 mb-2">${car.name}</h3>
+                        <div class="text-2xl font-extrabold text-gold font-serif mb-4">${car.price}</div>
+                        <p class="text-gray-300 text-xs mb-6 leading-relaxed">${car.description}</p>
+                        
+                        <div class="space-y-2 mb-6 text-xs text-gray-300">
+                            <div class="flex justify-between py-1.5 border-b border-dark-border">
+                                <span class="text-gray-400">Potencia del Motor:</span>
+                                <span class="font-semibold text-white">${car.hp}</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-dark-border">
+                                <span class="text-gray-400">Desempeño / Transmisión:</span>
+                                <span class="font-semibold text-white">${car.transmission}</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-dark-border">
+                                <span class="text-gray-400">Aceleración / Rendimiento:</span>
+                                <span class="font-semibold text-white">${car.acceleration}</span>
+                            </div>
+                        </div>
+
+                        <button onclick="closeSpecModal(); openTestDriveModal('${car.name}')" class="w-full gold-gradient-bg text-black font-bold py-3 rounded-xl uppercase tracking-wider text-xs hover:shadow-gold-glow transition-all">
+                            Reservar Este Modelo
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
+        }
+
+        function closeSpecModal() {
+            const modal = document.getElementById('spec-modal');
+            const container = document.getElementById('spec-modal-container');
+
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        // Initialize on load
+        window.onload = function() {
+            renderVehicles(vehicles);
+
+            // Add scrolled navbar backdrop effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-black/95', 'shadow-lg');
+                } else {
+                    navbar.classList.remove('bg-black/95', 'shadow-lg');
+                }
+            });
+        };
+    </script>
+</body>
+</html>
